@@ -8,7 +8,7 @@ convert.addEventListener("click",()=>{
 
     let salidas = conversion(input)
     
-    outputExpresion.innerText = "Expresion prefija: " + salidas[1]
+    outputExpresion.innerText = "Expresión prefija: " + salidas[1]
     outputEvaluacion.innerText = "Resultado: " + salidas[0]
     
 })
