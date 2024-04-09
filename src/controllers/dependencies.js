@@ -1,7 +1,12 @@
-import { Stack } from "../models/Stack.js";
+import { Stack} from "../models/Stack.js";
+import { ConversionIAP } from "../models/ConversionIAP.js";
 
-export const createStack = function(){
-    let newStack = new Stack()
-    return newStack
-}
+let stackSalida = new Stack()
+let stackOperadores = new Stack()
+const conversion = new ConversionIAP()
+
+export {stackSalida}
+export {stackOperadores}
+export {conversion}
+
 

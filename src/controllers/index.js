@@ -1,4 +1,4 @@
-import { conversion } from "../models/conversionInAPre.js"
+import { conversion } from "./dependencies.js"
 
 const convert = document.getElementById("button__button-convert")
 convert.addEventListener("click",()=>{
@@ -6,7 +6,7 @@ convert.addEventListener("click",()=>{
     const outputExpresion = document.getElementById("paragraph__paragraph-salidaExpresion")
     const outputEvaluacion = document.getElementById("paragraph__paragraph-salidaEvaluacion")
 
-    let salidas = conversion(input)
+    let salidas = conversion.infijoAPrefijo(input)
     
     outputExpresion.innerText = "Expresión prefija: " + salidas[1]
     outputEvaluacion.innerText = "Resultado: " + salidas[0]
