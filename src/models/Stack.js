@@ -43,6 +43,11 @@ export class Stack {
     size(){
         return this.#count
     }
+    
+    clear(){
+        this.#peek = undefined
+        this.#count = 0
+    }
 
     
 

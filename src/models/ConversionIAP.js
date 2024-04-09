@@ -1,6 +1,13 @@
-import { conversion,stackSalida,stackOperadores } from "../controllers/dependencies.js";
+import { Stack } from "./Stack.js";
 
 export class ConversionIAP {
+    #stackSalida
+    #stackOperadores
+
+    constructor(){
+        this.#stackOperadores = new Stack()
+        this.#stackSalida = new Stack()
+    }
 
     infijoAPrefijo(expresion){
         expresion = expresion.match(/[0-9]+|[-+*/()]/g)
@@ -9,30 +16,30 @@ export class ConversionIAP {
         expresion.forEach(element => {
             switch (element) {
                 case "+":
-                    stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     break;
                 case "-":
-                    stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     break;
                 case "*":
-                    stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     break;
                 case "/":
-                    stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     break;
                 
                 case "(":
-                    stackOperadores.push(element)
-                    stackOperadores.pop()
-                    while(stackOperadores.peek() != ")")
-                        stackSalida.push(stackOperadores.pop())
-                    stackOperadores.pop()
+                    sthis.#stackOperadores.push(element)
+                    this.#stackOperadores.pop()
+                    while(this.#stackOperadores.peek() != ")")
+                        this.#stackSalida.push(this.#stackOperadores.pop())
+                    this.#stackOperadores.pop()
                     break;
                 case ")":
-                    stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     break;
                 default:
-                    stackSalida.push(element)
+                    this.#stackSalida.push(element)
                     break;
                 
             }
@@ -41,16 +48,16 @@ export class ConversionIAP {
 
         
         
-        while(!(stackOperadores.isEmpty()))
-            stackSalida.push(stackOperadores.pop())
+        while(!(this.#stackOperadores.isEmpty()))
+            this.#stackSalida.push(this.#stackOperadores.pop())
 
         expresion = []
         
 
 
-        while(stackSalida.size() != 0)
+        while(this.#stackSalida.size() != 0)
             
-            expresion.push(stackSalida.pop())  
+            expresion.push(this.#stackSalida.pop())  
 
         let expresionPrefija = expresion.join() 
 
@@ -61,37 +68,37 @@ export class ConversionIAP {
         let resultado
         
         expresion.forEach(element => {
-            stackSalida.push(element)
+            this.#stackSalida.push(element)
             switch (element) {
                 case "+":
-                    stackSalida.pop()
-                    resultado = Number(stackSalida.pop())
-                    resultado += Number(stackSalida.pop())
-                    stackSalida.push(resultado)
+                    this.#stackSalida.pop()
+                    resultado = Number(this.#stackSalida.pop())
+                    resultado += Number(this.#stackSalida.pop())
+                    this.#stackSalida.push(resultado)
                     break;
                 case "-":
-                    stackSalida.pop()
-                    resultado = Number(stackSalida.pop())
-                    resultado -= Number(stackSalida.pop())
-                    stackSalida.push(resultado)
+                    this.#stackSalida.pop()
+                    resultado = Number(this.#stackSalida.pop())
+                    resultado -= Number(this.#stackSalida.pop())
+                    this.#stackSalida.push(resultado)
                     break;
                 case "*":
-                    stackSalida.pop()
-                    resultado = Number(stackSalida.pop())
-                    resultado *= Number(stackSalida.pop())
-                    stackSalida.push(resultado)
+                    this.#stackSalida.pop()
+                    resultado = Number(this.#stackSalida.pop())
+                    resultado *= Number(this.#stackSalida.pop())
+                    this.#stackSalida.push(resultado)
                     break;
                 case "/":
-                    stackSalida.pop()
-                    resultado = Number(stackSalida.pop())
-                    resultado /= Number(stackSalida.pop())
-                    stackSalida.push(resultado)
+                    this.#stackSalida.pop()
+                    resultado = Number(this.#stackSalida.pop())
+                    resultado /= Number(this.#stackSalida.pop())
+                    this.#stackSalida.push(resultado)
                     break;
                 default:
                     break;
             }
         });
 
-        return [stackSalida.pop(),expresionPrefija]
+        return [this.#stackSalida.pop(),expresionPrefija]
         }
 }
