@@ -29,7 +29,7 @@ export class ConversionIAP {
                     break;
                 
                 case "(":
-                    sthis.#stackOperadores.push(element)
+                    this.#stackOperadores.push(element)
                     this.#stackOperadores.pop()
                     while(this.#stackOperadores.peek() != ")")
                         this.#stackSalida.push(this.#stackOperadores.pop())
